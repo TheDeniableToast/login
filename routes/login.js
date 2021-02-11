@@ -2,13 +2,15 @@ var express = require('express');
 var router = express.Router();
 
 /* GET login form */
-router.get('/', function(req, res, next) {
+router.get('/', function (req, res, next) {
   //res.send('respond with a resource');
-  res.render('login', {title: 'bannanklubens heem sidda 👌👌👌👌👌👌'})
+  res.render('login', {
+    title: 'Välkommen till Chili`s 🌶🌶🌶'
+  })
 });
 
 /* POST login */
-router.post('/', function(req, res, next) {
+router.post('/', function (req, res, next) {
 
   console.log(req.body);
 
@@ -16,12 +18,15 @@ router.post('/', function(req, res, next) {
   const password = req.body.password;
 
   if (password == "bananpurre") {
-    res.send('Välkommen till Bananklubben grabben/grabbinnan 🍌🍌🍌🍌👌👌😘😘👍👍💋💋');
+    req.session.loggedin = true;
+    req.session.username = username;
+    res.redirect('/heemligt');
+
+  
   } else {
     res.render(
-      'login',
-      {
-        title: 'bannanklubens heem sidda 👌👌👌👌👌👌',
+      'login', {
+        title: 'Välkommen till Chili`s 🌶🌶🌶',
         error: 'FEL BITCH!'
       }
     );
