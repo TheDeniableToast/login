@@ -1,12 +1,24 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const bcrypt = require('bcrypt');
+const { query } = require('../models/db');
 
 /* GET login form */
 router.get('/', function (req, res, next) {
   //res.send('respond with a resource');
-  res.render('login', {
-    title: 'Välkommen till Chili`s 🌶🌶🌶'
-  })
+  res.render('login', {title: 'Chili`s 🌶🌶🌶'});
+});
+
+router.get('/kryptan/:pwd', function (req, res, next) {
+
+  const myPlaintextPassword = req.params.pwd;
+
+  bcrypt.hash(myPlaintextPassword, 10, function(err, hash) {
+    // Store hash in your password DB.
+    res.json({
+      pwd: hash
+    });
+  });
 });
 
 /* POST login */
@@ -26,7 +38,7 @@ router.post('/', function (req, res, next) {
   } else {
     res.render(
       'login', {
-        title: 'Välkommen till Chili`s 🌶🌶🌶',
+        title: 'Chili`s 🌶🌶🌶',
         error: 'FEL BITCH!'
       }
     );
