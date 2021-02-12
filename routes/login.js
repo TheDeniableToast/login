@@ -22,27 +22,53 @@ router.get('/kryptan/:pwd', function (req, res, next) {
 });
 
 /* POST login */
-router.post('/', function (req, res, next) {
-
-  console.log(req.body);
+router.post('/', async function (req, res, next) {
 
   const username = req.body.username;
   const password = req.body.password;
 
-  if (password == "bananpurre") {
-    req.session.loggedin = true;
-    req.session.username = username;
-    res.redirect('/heemligt');
+  if (username && password) {
+
+    try {
+      const sql = 'SELECT password FROM users WHERE name = ?';
+      const result = await query(sql, username);
+
+      bcrypt.compare(password, result[0].password, function(err, result) {
+        if (result == true) {
+          req.session.loggedin = true;
+          req.session.username = username;
+          res.redirect('/heemligt');
+        } else {
+          res.render(
+            'login',
+            {
+              title: 'Chili`s 🌶🌶🌶',
+              error: 'FEL LÖSENORD/ANVÄNDARE DIN BITCH FÖRSÖK INTE KOMMA IN OCH JÄVLAS MED CHILIGANG!'
+            }
+          )
+        }
+    });
+
+    } catch(e) {
+      next(e);
+      console.error(e);
+    }
+  }
+
+  // if (password == "bananpurre") {
+    // req.session.loggedin = true;
+    // req.session.username = username;
+    // res.redirect('/heemligt');
 
   
-  } else {
-    res.render(
-      'login', {
-        title: 'Chili`s 🌶🌶🌶',
-        error: 'FEL BITCH!'
-      }
-    );
-  }
+  // } else {
+    // res.render(
+      // 'login', {
+        // title: 'Chili`s 🌶🌶🌶',
+        //error: 'FEL BITCH!'
+      // }
+    // );
+  // }
 
 });
 
