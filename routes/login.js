@@ -50,12 +50,12 @@ router.post('/',
           req.session.username = username;
           res.redirect('/heemligt');
         } else {
-          res.render('login', {errors: 'FEL LÖSENORD/ANVÄNDARNAMN'});
+          res.render('/login', {errors: 'FEL LÖSENORD/ANVÄNDARNAMN'});
         }
       });
-    } else {
-      res.render('login', {errors: 'FEL LÖSENORD/ANVÄNDARNAMN'});
-    }
+      } else {
+        res.render('/login', {errors: 'FEL LÖSENORD/ANVÄNDARNAMN'});
+      }
   } catch(e) {
     next(e);
     console.error(e);
