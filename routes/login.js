@@ -48,7 +48,7 @@ router.post('/',
         if (result == true) {
           req.session.loggedin = true;
           req.session.username = username;
-          res.redirect('/heemligt');
+          res.redirect('/home');
         } else {
           res.render('/login', {errors: 'FEL LÖSENORD/ANVÄNDARNAMN'});
         }

@@ -35,7 +35,7 @@ describe('/login', () => {
         .type('form')
         .send({username: process.env.TEST_USER, password: process.env.TEST_PASSWORD})
         .expect(302)
-        .expect('Location', '/heemligt')
+        .expect('Location', '/home')
         .end((err, res) => {
           if (err) throw err;
           return done();
@@ -56,10 +56,10 @@ describe('/login', () => {
   });
 });
 
-describe('/heemligt', () => {
+describe('/home', () => {
   describe('GET /', () => {
     it('should return OK status', () => {
-      request.get('/heemligt')
+      request.get('/home')
         .expect(200)
         .end((err, res) => {
           if (err) throw err;
@@ -67,7 +67,7 @@ describe('/heemligt', () => {
     });
 
     it('should return message on rendering', () => {
-      request.get('/heemligt')
+      request.get('/home')
         .end((err, res) => {
           if (err) throw err;
           expect(res.text).to.contain('');

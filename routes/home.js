@@ -3,7 +3,11 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('home', { title: 'Express' });
+  if (req.session.loggedin) {
+    res.send('SNYGGT JOBBAT BITCH DU ÄR INNE!');
+  }else{
+      res.send('LOGGA IN BITCH!');
+  }
 });
 
 module.exports = router;
