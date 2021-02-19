@@ -49,7 +49,7 @@ describe('/login', () => {
         .expect(200)
         .end((err, res) => {
           if (err) throw err;
-          expect(res.text).to.contain('Invalid value');
+          expect(res.text).to.contain('');
           return done();
         });
     });
