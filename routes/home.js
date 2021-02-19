@@ -4,9 +4,9 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', function(req, res, next) {
   if (req.session.loggedin) {
-    res.send('SNYGGT JOBBAT BITCH DU ÄR INNE!');
+    res.render('home');
   }else{
-      res.send('LOGGA IN BITCH!');
+      res.redirect('/login');
   }
 });
 

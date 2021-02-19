@@ -58,19 +58,12 @@ describe('/login', () => {
 
 describe('/home', () => {
   describe('GET /', () => {
-    it('should return OK status', () => {
-      request.get('/home')
-        .expect(200)
-        .end((err, res) => {
-          if (err) throw err;
-        });
-    });
-
     it('should return message on rendering', () => {
       request.get('/home')
+        .expect(302)
+        .expect('Location', '/login')
         .end((err, res) => {
           if (err) throw err;
-          expect(res.text).to.contain('');
         });
     });
   });
