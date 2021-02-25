@@ -8,12 +8,12 @@ block content
         label.form-label.visually-hidden(for="username") Username: 
         input#username.form-control(placeholder="Användarnamn" type="text", name="username", value=username ? username : '', class=errors ? 'is-invalid' : '') 
         if errors
-          .invalid-feedback FEL BITCH!
+          .invalid-feedback Ditt användarnamn eller lösenord är fel
       .mb-3
         label.form-label.visually-hidden(for="password") Password: 
         input#password.form-control(placeholder="Lösenord" type="password", name="password" class=errors ? 'is-invalid' : '')
         if errors 
-          .invalid-feedback FEL BITCH!
+          .invalid-feedback Ditt användarnamn eller lösenord är fel
 
       button.w-100.btn.btn-primary(type="submit") Logga in
       a(href ='/register') Inte medlem? Gå med i chiligang idag!
