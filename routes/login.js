@@ -8,10 +8,11 @@ router.get('/', AuthController.show);
 
 /* POST login */
 router.post('/',
-  body('username').notEmpty().trim(), 
-  body('password').notEmpty(), 
+  body('username').notEmpty().trim().toLowerCase(),
+  body('password').notEmpty(),
+  body('rememberme').toBoolean(),
   AuthController.store
-  );
+);
 
 
 module.exports = router;

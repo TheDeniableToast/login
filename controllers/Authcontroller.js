@@ -34,11 +34,11 @@ module.exports.store = async function(req, res, next) {
           req.session.username = username;
           res.redirect('/home');
         } else {
-          res.render('/login', {errors: 'FEL LÖSENORD/ANVÄNDARNAMN'});
+          res.render('login', {errors: 'FEL LÖSENORD/ANVÄNDARNAMN'});
         }
       });
       } else {
-        res.render('/login', {errors: 'FEL LÖSENORD/ANVÄNDARNAMN'});
+        res.render('login', {errors: 'FEL LÖSENORD/ANVÄNDARNAMN'});
       }
   } catch(e) {
     next(e);
