@@ -1,8 +1,11 @@
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-image: linear-gradient(red 0%, red 30%, yellow 30%, yellow 70%);
+  background-size: 10px;
+  color: #FFB300; }
 
 a {
-  color: #00B7FF; }
+  color: #FFB300; }
 
 /*# sourceMappingURL=style.css.map */

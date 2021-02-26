@@ -30,8 +30,15 @@ module.exports.store = async function(req, res, next) {
         }
 
       } catch (e) {
-        next(e);
         console.error(e);
+        if (e.errno === 1062) {
+          return res.render('register', { title: 'Chiligang', 
+            username: e.sqlMessage.includes('users.name') ? 'Otillgängligt' : null,
+            email: e.sqlMessage.includes('users.email') ? 'Otillgängligt' : null,
+          });
+        } else {
+          next(e);
+        }  
       }
     });
 };
