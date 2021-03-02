@@ -12,7 +12,6 @@ module.exports.show = async function(req, res, next) {
 module.exports.store = async function(req, res, next) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      console.log(errors.array());
       return res.status(400).render('register', { errors: errors.array() });
     }
     const username = req.body.username;

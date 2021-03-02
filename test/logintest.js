@@ -1,15 +1,9 @@
-// npm install mocha chai supertest --save-dev
-// mkdir test
-// save logintest.js
-// package.json
-// "test": "mocha -r dotenv/config --timeout 10000 --exit"
-
 const expect = require('chai').expect;
 const app = require('../app');
 const request = require('supertest')(app);
+const session = require('supertest-session')(app);
 
 describe('/login', () => {
-
   describe('GET /', () => {
     it('should return OK status', () => {
       request.get('/login')
@@ -23,17 +17,42 @@ describe('/login', () => {
       request.get('/login')
         .end((err, res) => {
           if (err) throw err;
-          expect(res.text).to.contain('')
+          expect(res.text).to.contain('🌶🌶 CHILI.COM 🌶🌶')
           return done();
         });
     });
+    
+    // detta test bör även köras på register om inloggad
+    it('should show home if user is logged in', (done) => {
+      let authenticatedSession = null;
+      session.post('/login')
+        .type('form')
+        .send({
+          username: process.env.TEST_USER,
+          password: process.env.TEST_PASSWORD
+        })
+        .expect(302)
+        .end((err) => {
+            if (err) return done(err);
+            authenticatedSession = session;
+            authenticatedSession.get('/login')
+            .expect(302)
+            .end((err, res) => {
+              if (err) return done(err);
+              return done();
+            });
+          });
+      });
   });
 
   describe('POST /', () => {
     it('should sign in user provided it has a correct request body', (done) => {
       request.post('/login')
         .type('form')
-        .send({username: process.env.TEST_USER, password: process.env.TEST_PASSWORD})
+        .send({
+          username: process.env.TEST_USER,
+          password: process.env.TEST_PASSWORD
+        })
         .expect(302)
         .expect('Location', '/home')
         .end((err, res) => {
@@ -46,24 +65,11 @@ describe('/login', () => {
       request.post('/login')
         .type('form')
         .send({username: '', password: ''})
-        .expect(200)
+        .expect(400)
         .end((err, res) => {
           if (err) throw err;
-          expect(res.text).to.contain('');
+          expect(res.text).to.contain('Ditt användarnamn eller lösenord är fel');
           return done();
-        });
-    });
-  });
-});
-
-describe('/home', () => {
-  describe('GET /', () => {
-    it('should return message on rendering', () => {
-      request.get('/home')
-        .expect(302)
-        .expect('Location', '/login')
-        .end((err, res) => {
-          if (err) throw err;
         });
     });
   });
