@@ -1,12 +1,14 @@
 exports.verify = (req, res, next) => {
-    const session = req.session;
-    if (!session) {
-        res.redirect('/login');
+  const session = req.session;
+  if (!session) {
+    req.flash('warn', 'Unauthenticated, please sign in.');
+    res.redirect('/login');
+  } else {
+    if (session.loggedin) {
+      next();
     } else {
-      if (session.loggedin) {
-        next();
-      } else {
-        res.redirect('/login')
-      }
+      req.flash('warn', 'Unauthenticated, please sign in.');
+      res.redirect('/login');
     }
+  }
 }

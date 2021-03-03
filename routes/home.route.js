@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const {body, validationResult} = require('express-validator');
-const {query} = require('../models/db.js')
+const {query} = require('../models/db.model')
 const {verify} = require('../middlewares/verify');
 
 /* GET topsekret page. */

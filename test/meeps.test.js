@@ -2,7 +2,7 @@ const expect = require('chai').expect;
 const app = require('../app');
 // const request = require('supertest');
 const session = require('supertest-session')(app);
-const { query } = require('../models/db.js');
+const { query } = require('../models/db.model.js');
 const bcrypt = require('bcrypt');
 
 // testet börjar här
