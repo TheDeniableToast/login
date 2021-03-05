@@ -1,10 +1,15 @@
 extends layout 
 
 block content 
-  main.container
-    form(action="/logout", method="post")
+  main.container.d-flex.justify-content-center.align-items-center.h-100.w-100.flex-column
+    form(action="/edit", method="post")
+      h1 Hej #{username}! Välkommen till Chiligang.
+      .mb-3
+        label.form-label.visually-hidden(for="newusername") Username: 
+        input#username.form-control(placeholder="Nytt Användarnamn" type="text", name="username", value=username ? username : '', class=errors ? 'is-invalid' : '') 
+        if errors
+          .invalid-feedback Fel
+      button.w-100.btn.btn-primary(type="submit") Ändra användarnamn    
+
+    form(action="/logout", method="post")      
       button(type="submit") Logout 
-  
-    h1 Hej #{username}! Välkommen till Chiligang.
-  
-    h2 Change password

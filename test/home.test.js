@@ -23,7 +23,7 @@ describe('/home', () => {
       .expect(200)
       .end((err, res) => {
         if (err) return done(err);
-        expect(res.text).to.contain(process.env.TEST_USER);
+        expect(res.text).to.contain('Hej ' + process.env.TEST_USER + '! Välkommen till Chiligang.');
         return done();
       });
   });

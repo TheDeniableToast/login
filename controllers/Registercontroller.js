@@ -9,6 +9,7 @@ module.exports.show = async function(req, res, next) {
   return res.render('register', { title: 'Chiligang'});
 };
 
+
 module.exports.store = async function(req, res, next) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -28,6 +29,7 @@ module.exports.store = async function(req, res, next) {
           res.render('login', {username: username});
         }
 
+        //felmeddelande om namn/email är otillgängligt
       } catch (e) {
         console.error(e);
         if (e.errno === 1062) {

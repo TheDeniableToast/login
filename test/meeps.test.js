@@ -1,6 +1,6 @@
 const expect = require('chai').expect;
 const app = require('../app');
-// const request = require('supertest');
+const request = require('supertest');
 const session = require('supertest-session')(app);
 const { query } = require('../models/db.model.js');
 const bcrypt = require('bcrypt');
@@ -25,7 +25,7 @@ describe('meeps route', () => {
     // vad förväntar vi oss ska ske, it should return...
     it('should return OK status', () => {
       // utför requesten, kontrollera att den svarar 200 och avsluta sedan testet
-      request.get('/meeps')
+      session.get('/meeps')
       .expect(200)
       .end((err, res) => {
         if (err) return done(err);
@@ -37,7 +37,7 @@ describe('meeps route', () => {
     // vad förväntar vi oss ska ske, it should return...
     it('should return OK status', () => {
       // utför requesten, kontrollera att den svarar 200 och avsluta sedan testet
-      request.get('/meeps/:id')
+      request(app).get('/meeps/:id')
       .expect(200)
       .end((err, res) => {
         if (err) return done(err);

@@ -20,7 +20,7 @@ describe('index route', () => {
     request.get('/')
       .end((err, res) => {
         if (err) throw err;
-        expect(res.text).to.contain('Välkommen till Loginsidan')
+        expect(res.text).to.contain('Chiligangs officiella hemsida!')
         return done();
       });
   });

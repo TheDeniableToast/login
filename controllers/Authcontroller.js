@@ -13,10 +13,11 @@ module.exports.destroy = async function(req, res, next) {
   // logga ut användaren
   req.session.loggedin = false;
   req.session.destroy();
-  return res.redirect('/');
+  return res.redirect('/login');
 };
 
 module.exports.store = async function(req, res, next) {
+    //Logga in användaren
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).render('login',{ username: req.body.username, errors: errors.array()});
@@ -55,3 +56,4 @@ module.exports.store = async function(req, res, next) {
       console.error(e);
     }
 };
+

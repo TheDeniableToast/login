@@ -1,6 +1,7 @@
 extends layout
 
 block content
-  h1= title
-  p Välkommen till #{title}
-  a(href = '/login') Logga in här!
+  main.container.d-flex.justify-content-center.align-items-center.h-100.w-100.flex-column
+    h1= title
+    p Välkommen till #{title}
+    a(href = '/login') Logga in här!
